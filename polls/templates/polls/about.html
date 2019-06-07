@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Tags</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid" style="align-content: center;">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Admin Panel</a>
+    </div>
+   
+  </div>
+</nav>
+<br><br>
+<h1>Your tag is: {{ t1 }} </h1>
+<br>
+<div class="container">
+  <h2>Basic Table</h2>
+ 
+{% if len == 0 %}
+          
+     No result for this {{ t1 }}  tag. <br>Below result contain the list of related tags that might help you.....<br>
+     <table class="table" style="width:50%">
+    <thead>
+      <tr>
+       
+       <th >Related Tags</th>
+        <th >Select Option</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for tit in sugg %}
+<tr>   <td> {{ tit }}  </td>     
+         <td><a href="?text={{ tit }}"> Click Me </a> </td>  
+ </tr>
+{% endfor %}
+    </tbody>
+  </table>	
+<h1><a href="/">Back to Home</a></h1>
+
+{% else %}
+
+     
+  <p>The table conatins list of {{ len }} latest blog related to your tag :</p>            
+  <table class="table">
+    <thead>
+      <tr>
+       
+       <th style="width:20%">No</th>
+        <th>Title</th>
+        <th>Creator</th>
+      </tr>
+    </thead>
+    <tbody>
+
+       {% for a in v2 %}
+
+      
+      <tr>   
+        <td><a href="/page/?text={{ a }}&tag={{ t1 }}">   {{ forloop.counter }} </a></td>
+        <td> <a href="/page/?text={{ a }}&tag={{ t1 }}">        
+          {% for aa in v1 %}
+                {% if forloop.parentloop.counter == forloop.counter %}
+                    {{ aa }} 
+   
+                 {% endif %}
+           {% endfor %} </a>
+         </td>
+         <td><a href="/page/?text={{ a }}&tag={{ t1 }}">
+                  {% for aaa in v3 %}
+                {% if forloop.parentloop.counter == forloop.counter %}
+                    {{ aaa }} 
+   
+                 {% endif %}
+           {% endfor %}  </a>
+        </td>
+      </tr>
+   
+        {% endfor %}
+
+
+    
+
+    </tbody>
+  </table>
+   
+{% endif %}
+
+</div>
+
+<br>
+ 
+
+
+<br><br>
+<footer class="container-fluid text-center">
+  <p>Online Web  App</p>  
+  <p><b>Created by Pramod Yadav</b></p>
+</footer>
+
+</body>
+</html>
+
